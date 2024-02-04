@@ -1,10 +1,10 @@
-export const ACTIVITY_LEVEL = {
-  ACTIVE: 'active',
-  MODERATE: 'moderate',
-  SEDENTARY: 'sedentary'
+export const ACTIVITY_LEVELS = {
+  ACTIVE: "active",
+  MODERATE: "moderate",
+  SEDENTARY: "sedentary",
 };
 
 export const GENDER = {
-  FEMALE: 'female',
-  MALE: 'male'
+  FEMALE: "female",
+  MALE: "male",
 };

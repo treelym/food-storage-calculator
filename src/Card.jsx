@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { ACTIVITY_LEVEL } from "./constants";
+import { ACTIVITY_LEVELS } from "./constants";
 
 function Card({ activityLevel, age, gender, index }) {
   const [personAge, setPersonAge] = useState(0);
