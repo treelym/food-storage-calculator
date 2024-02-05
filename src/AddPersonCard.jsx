@@ -1,16 +1,33 @@
-import { ACTIVITY_LEVELS } from "./constants";
+import { useState } from "react";
+import { ACTIVITY_LEVELS, GENDER } from "./constants";
 
-const AddPersonCard = () => {
+const AddPersonCard = ({ onClick }) => {
+  const [gender, setGender] = useState(GENDER.MALE);
+  const [age, setAge] = useState(0);
+  const [activityLevel, setActivityLevel] = useState(ACTIVITY_LEVELS.ACTIVE);
+
+  const isMaleSelected = gender === GENDER.MALE;
+
   return (
     <div className="card">
       <div className="card-content">
         <div className="tabs is-toggle is-fullwidth">
           <ul>
-            <li className="is-active">
-              <a href="#">Male</a>
+            <li className={isMaleSelected ? "is-active" : null}>
+              <a
+                className="button button-male"
+                onClick={() => setGender(GENDER.MALE)}
+              >
+                Male
+              </a>
             </li>
-            <li>
-              <a href="#">Female</a>
+            <li className={!isMaleSelected ? "is-active" : null}>
+              <a
+                className="button button-female"
+                onClick={() => setGender(GENDER.FEMALE)}
+              >
+                Female
+              </a>
             </li>
           </ul>
         </div>
@@ -52,7 +69,10 @@ const AddPersonCard = () => {
           </div>
         </div>
 
-        <button className="button is-success is-fullwidth mt-5">
+        <button
+          className="button is-success is-fullwidth mt-5"
+          // onClick={() => onClick(gender)}
+        >
           Add Person
         </button>
       </div>

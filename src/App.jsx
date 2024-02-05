@@ -20,10 +20,6 @@ function App() {
     setPeople([...people, newPerson]);
   };
 
-  // const handleClick = () => {
-  //   console.log('calculate!');
-  // };
-
   return (
     <div className="container">
       <h1 className="title">Food storage calculator</h1>
@@ -31,7 +27,7 @@ function App() {
       <p>Use the form below to add the people in your home</p>
       <div className="columns is-multiline">
         <div className="column is-one-third">
-          <AddPersonCard />
+          <AddPersonCard onClick={handleAddPerson} />
         </div>
         <div
           className="column is-full has-background-white-ter my-5"

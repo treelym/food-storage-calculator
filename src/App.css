@@ -1,0 +1,6 @@
+.tabs.is-toggle li.is-active a.button-male {
+  background-color: blue;
+}
+.tabs.is-toggle li.is-active a.button-female {
+  background-color: pink;
+}
