@@ -13,6 +13,10 @@ const AddPersonCard = ({ onClick }) => {
     setAge(e.target.value);
   };
 
+  const handleActivityLevelChange = (e) => {
+    setActivityLevel(e.target.value);
+  };
+
   return (
     <div className="card">
       <div className="card-content">
@@ -54,17 +58,18 @@ const AddPersonCard = ({ onClick }) => {
         <div className="field">
           <label className="label">Activity Level</label>
           <div className="select is-fullwidth">
-            <select required>
-              {Object.keys(ACTIVITY_LEVELS).map((activityLevel) => {
-                const currentActivityLevel = ACTIVITY_LEVELS[activityLevel];
-                const displayValue = `${currentActivityLevel[0].toUpperCase()}${currentActivityLevel.slice(
+            <select
+              required
+              onChange={handleActivityLevelChange}
+              value={activityLevel}
+            >
+              {Object.keys(ACTIVITY_LEVELS).map((levelKey) => {
+                const levelValue = ACTIVITY_LEVELS[levelKey];
+                const displayValue = `${levelValue[0].toUpperCase()}${levelValue.slice(
                   1
                 )}`;
                 return (
-                  <option
-                    key={currentActivityLevel}
-                    value={currentActivityLevel}
-                  >
+                  <option key={levelValue} value={levelValue}>
                     {displayValue}
                   </option>
                 );
