@@ -8,6 +8,11 @@ const AddPersonCard = ({ onClick }) => {
 
   const isMaleSelected = gender === GENDER.MALE;
 
+  const handleAgeChange = (e) => {
+    // TODO: Validation for strings and negative numbers
+    setAge(e.target.value);
+  };
+
   return (
     <div className="card">
       <div className="card-content">
@@ -39,10 +44,9 @@ const AddPersonCard = ({ onClick }) => {
               className="input"
               min="0"
               max="100"
-              placeholder={0}
-              // onChange={handleAgeChange}
+              onChange={handleAgeChange}
               type="number"
-              // value={personAge || age}
+              value={age}
             />
           </div>
         </div>
