@@ -1,7 +1,8 @@
 import { useState } from "react";
+
 import { ACTIVITY_LEVELS, GENDER } from "./constants";
 
-const AddPersonCard = ({ onClick }) => {
+const AddPersonCard = ({ handleAddPerson }) => {
   const [gender, setGender] = useState(GENDER.MALE);
   const [age, setAge] = useState(0);
   const [activityLevel, setActivityLevel] = useState(ACTIVITY_LEVELS.ACTIVE);
@@ -15,6 +16,12 @@ const AddPersonCard = ({ onClick }) => {
 
   const handleActivityLevelChange = (e) => {
     setActivityLevel(e.target.value);
+  };
+
+  const handleResetFields = () => {
+    setActivityLevel(ACTIVITY_LEVELS.ACTIVE);
+    setAge(0);
+    setGender(GENDER.MALE);
   };
 
   return (
@@ -58,11 +65,7 @@ const AddPersonCard = ({ onClick }) => {
         <div className="field">
           <label className="label">Activity Level</label>
           <div className="select is-fullwidth">
-            <select
-              required
-              onChange={handleActivityLevelChange}
-              value={activityLevel}
-            >
+            <select onChange={handleActivityLevelChange} value={activityLevel}>
               {Object.keys(ACTIVITY_LEVELS).map((levelKey) => {
                 const levelValue = ACTIVITY_LEVELS[levelKey];
                 const displayValue = `${levelValue[0].toUpperCase()}${levelValue.slice(
@@ -80,7 +83,10 @@ const AddPersonCard = ({ onClick }) => {
 
         <button
           className="button is-success is-fullwidth mt-5"
-          // onClick={() => onClick(gender)}
+          onClick={() => {
+            handleAddPerson({ activityLevel, age, gender });
+            handleResetFields();
+          }}
         >
           Add Person
         </button>

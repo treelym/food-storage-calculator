@@ -3,20 +3,19 @@ import { useState } from "react";
 import "./App.css";
 import AddPersonCard from "./AddPersonCard";
 import Card from "./Card";
-import { ACTIVITY_LEVELS, GENDER } from "./constants";
-
-// const defaultPerson = {
-//   gender: GENDER.MALE,
-//   age: 0,
-//   activityLevel: ACTIVITY_LEVEL.ACTIVE,
-//   key: 1,
-// };
 
 function App() {
   const [people, setPeople] = useState([]);
 
-  const handleAddPerson = () => {
-    const newPerson = { ...defaultPerson, key: people.length + 1 };
+  console.log("people", people);
+
+  const handleAddPerson = (newPersonObj) => {
+    const newPerson = {
+      activityLevel: newPersonObj.activityLevel,
+      age: newPersonObj.age,
+      gender: newPersonObj.gender,
+      key: people.length + 1,
+    };
     setPeople([...people, newPerson]);
   };
 
@@ -27,22 +26,27 @@ function App() {
       <p>Use the form below to add the people in your home</p>
       <div className="columns is-multiline">
         <div className="column is-one-third">
-          <AddPersonCard onClick={handleAddPerson} />
+          <AddPersonCard handleAddPerson={handleAddPerson} />
         </div>
         <div
           className="column is-full has-background-white-ter my-5"
           style={{ minHeight: "100vh" }}
         >
-          {people.map((person, index) => (
-            <div className="column is-multiline is-one-third" key={person.key}>
-              <Card
-                activityLevel={person.activityLevel}
-                age={person.age}
-                gender={person.gender}
-                index={index + 1}
-              />
-            </div>
-          ))}
+          <div className="columns is-multiline">
+            {people.map((person, index) => (
+              <div
+                className="column is-multiline is-one-third"
+                key={person.key}
+              >
+                <Card
+                  activityLevel={person.activityLevel}
+                  age={person.age}
+                  gender={person.gender}
+                  index={index + 1}
+                />
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </div>
