@@ -1,14 +1,12 @@
-import { useState } from "react";
+import PropTypes from "prop-types";
 
-function Card({ activityLevel, age, gender, index }) {
+export default function Card({ name, age, gender, index }) {
   return (
     <div data-test-id="card-container">
       <h2>Person #{index}</h2>
       <div className="card">
         <div className="card-content">
-          <p>
-            Activity Level: <span>{activityLevel}</span>
-          </p>
+          <p>Name: {name}</p>
           <p>
             Age: <span>{age}</span>
           </p>
@@ -21,4 +19,9 @@ function Card({ activityLevel, age, gender, index }) {
   );
 }
 
-export default Card;
+Card.propTypes = {
+  age: PropTypes.number,
+  name: PropTypes.string,
+  gender: PropTypes.string,
+  index: PropTypes.number,
+};

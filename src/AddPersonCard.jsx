@@ -1,90 +1,96 @@
 import { useState } from "react";
+import PropTypes from "prop-types";
 
-import { ACTIVITY_LEVELS, GENDER } from "./constants";
+import { GENDER } from "./constants";
 
-const AddPersonCard = ({ handleAddPerson }) => {
-  const [gender, setGender] = useState(GENDER.MALE);
+const AddPersonCard = ({ people, setPeople }) => {
+  const [name, setName] = useState("");
+  const [gender, setGender] = useState("");
   const [age, setAge] = useState(0);
-  const [activityLevel, setActivityLevel] = useState(ACTIVITY_LEVELS.ACTIVE);
-
-  const isMaleSelected = gender === GENDER.MALE;
 
   const handleAgeChange = (e) => {
     // TODO: Validation for strings and negative numbers
     setAge(e.target.value);
   };
 
-  const handleActivityLevelChange = (e) => {
-    setActivityLevel(e.target.value);
+  const handleResetFields = () => {
+    setAge(0);
+    setGender("");
+    setName("");
   };
 
-  const handleResetFields = () => {
-    setActivityLevel(ACTIVITY_LEVELS.ACTIVE);
-    setAge(0);
-    setGender(GENDER.MALE);
+  const handleAddPerson = (newPersonObj) => {
+    const newPerson = {
+      name: newPersonObj.name,
+      age: newPersonObj.age,
+      gender: newPersonObj.gender,
+      key: people.length + 1,
+    };
+    setPeople([...people, newPerson]);
   };
 
   return (
     <div className="card">
       <div className="card-content">
-        <div className="tabs is-toggle is-fullwidth">
-          <ul>
-            <li className={isMaleSelected ? "is-active" : null}>
-              <a
-                className="button button-male"
-                onClick={() => setGender(GENDER.MALE)}
-              >
-                Male
-              </a>
-            </li>
-            <li className={!isMaleSelected ? "is-active" : null}>
-              <a
-                className="button button-female"
-                onClick={() => setGender(GENDER.FEMALE)}
-              >
-                Female
-              </a>
-            </li>
-          </ul>
-        </div>
-
-        <div className="field">
-          <label className="label">Age</label>
-          <div className="control">
+        <p className="has-text-centered mb-6">
+          Use this form to add the people in your household to see your daily
+          caloric needs
+        </p>
+        <div className="field is-horizontal">
+          <div className="field-label is-normal">
+            <label className="label">Name</label>
+          </div>
+          <div className="field-body">
             <input
               className="input"
-              min="0"
-              max="100"
-              onChange={handleAgeChange}
-              type="number"
-              value={age}
+              onChange={(e) => setName(e.target.value)}
+              type="text"
+              value={name}
+              placeholder="Swim? Swammi? Slippy? Slappy? Swenson? Swanson?"
             />
           </div>
         </div>
 
-        <div className="field">
-          <label className="label">Activity Level</label>
-          <div className="select is-fullwidth">
-            <select onChange={handleActivityLevelChange} value={activityLevel}>
-              {Object.keys(ACTIVITY_LEVELS).map((levelKey) => {
-                const levelValue = ACTIVITY_LEVELS[levelKey];
-                const displayValue = `${levelValue[0].toUpperCase()}${levelValue.slice(
-                  1
-                )}`;
-                return (
-                  <option key={levelValue} value={levelValue}>
-                    {displayValue}
-                  </option>
-                );
-              })}
-            </select>
+        <div className="field is-horizontal">
+          <div className="field-label is-normal">
+            <label className="label">Gender</label>
+          </div>
+          <div className="field-body">
+            <div className="select is-expanded">
+              <select
+                onChange={(e) => setGender(e.target.value)}
+                value={gender}
+              >
+                <option value="">Select Gender</option>
+                <option value={GENDER.MALE}>Male</option>
+                <option value={GENDER.FEMALE}>Female</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <div className="field is-horizontal">
+          <div className="field-label is-normal">
+            <label className="label">Age</label>
+          </div>
+          <div className="field-body">
+            <div className="control">
+              <input
+                className="input"
+                min="0"
+                max="100"
+                onChange={handleAgeChange}
+                type="number"
+                value={age}
+              />
+            </div>
           </div>
         </div>
 
         <button
           className="button is-success is-fullwidth mt-5"
           onClick={() => {
-            handleAddPerson({ activityLevel, age, gender });
+            handleAddPerson({ age, gender, name });
             handleResetFields();
           }}
         >
@@ -93,6 +99,11 @@ const AddPersonCard = ({ handleAddPerson }) => {
       </div>
     </div>
   );
+};
+
+AddPersonCard.propTypes = {
+  people: PropTypes.array,
+  setPeople: PropTypes.func,
 };
 
 export default AddPersonCard;
