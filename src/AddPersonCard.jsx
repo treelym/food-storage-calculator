@@ -106,8 +106,8 @@ const AddPersonCard = ({ people, setPeople }) => {
 };
 
 AddPersonCard.propTypes = {
-  people: PropTypes.array,
-  setPeople: PropTypes.func,
+  people: PropTypes.array.isRequired,
+  setPeople: PropTypes.func.isRequired,
 };
 
 export default AddPersonCard;

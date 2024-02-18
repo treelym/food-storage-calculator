@@ -20,8 +20,8 @@ export default function Card({ name, age, gender, index }) {
 }
 
 Card.propTypes = {
-  age: PropTypes.number,
+  age: PropTypes.number.isRequired,
   name: PropTypes.string,
-  gender: PropTypes.string,
-  index: PropTypes.number,
+  gender: PropTypes.string.isRequired,
+  index: PropTypes.number.isRequired,
 };
