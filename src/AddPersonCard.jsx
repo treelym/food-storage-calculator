@@ -10,7 +10,7 @@ const AddPersonCard = ({ people, setPeople }) => {
 
   const handleAgeChange = (e) => {
     // TODO: Validation for strings and negative numbers
-    setAge(e.target.value);
+    setAge(Number(e.target.value));
   };
 
   const handleResetFields = () => {
@@ -32,13 +32,13 @@ const AddPersonCard = ({ people, setPeople }) => {
   return (
     <div className="card">
       <div className="card-content">
-        <p className="has-text-centered mb-6">
+        <p className="has-text-centered is-size-5 has-text-weight-bold mb-6">
           Use this form to add the people in your household to see your daily
           caloric needs
         </p>
         <div className="field is-horizontal">
           <div className="field-label is-normal">
-            <label className="label">Name</label>
+            <label className="label">Name (optional)</label>
           </div>
           <div className="field-body">
             <input
@@ -77,7 +77,7 @@ const AddPersonCard = ({ people, setPeople }) => {
             <div className="control">
               <input
                 className="input"
-                min="0"
+                min="2"
                 max="100"
                 onChange={handleAgeChange}
                 type="number"
@@ -89,12 +89,16 @@ const AddPersonCard = ({ people, setPeople }) => {
 
         <button
           className="button is-success is-fullwidth mt-5"
+          disabled={!gender || !age}
           onClick={() => {
             handleAddPerson({ age, gender, name });
             handleResetFields();
           }}
         >
-          Add Person
+          <span>Add Person</span>
+          <span className="icon">
+            <i className="fa fa-plus"></i>
+          </span>
         </button>
       </div>
     </div>

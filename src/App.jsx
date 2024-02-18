@@ -72,18 +72,11 @@ function App() {
   };
 
   return (
-    <section className="section is-medium">
+    <section className="section">
       <div className="container">
         <div className="columns">
-          <div className="column is-4 is-offset-2">
+          <div className="column is-6 is-offset-3">
             <AddPersonCard people={people} setPeople={setPeople} />
-          </div>
-          <div className="column is-4">
-            <p>
-              Add people in your household using the form on the left to
-              calculate your daily caloric needs
-            </p>
-            <button className="button is-fullwidth">Calculate Calories</button>
           </div>
         </div>
         <div className="columns is-multiline">
