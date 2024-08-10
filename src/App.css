@@ -1,6 +1,4 @@
-.tabs.is-toggle li.is-active a.button-male {
-  background-color: blue;
-}
-.tabs.is-toggle li.is-active a.button-female {
-  background-color: pink;
+.App {
+  background-color: #f5f5f5;
+  min-height: 100vh;
 }
